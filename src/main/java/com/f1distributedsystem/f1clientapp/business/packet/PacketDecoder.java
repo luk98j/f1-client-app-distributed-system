@@ -1,15 +1,21 @@
 package com.f1distributedsystem.f1clientapp.business.packet;
 
+import com.f1distributedsystem.f1clientapp.business.packet.data.FinalClassificationData;
 import com.f1distributedsystem.f1clientapp.business.packet.enumsPacket.PacketId;
-import com.f1distributedsystem.f1clientapp.business.packet.impl.PacketLapData;
-import com.f1distributedsystem.f1clientapp.business.packet.impl.PacketSessionData;
+import com.f1distributedsystem.f1clientapp.business.packet.impl.*;
 import io.netty.buffer.ByteBuf;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class PacketDecoder {
 
     public PacketDecoder() {
+    }
+
+    public boolean checkPacket(ByteBuf byteBuf){
+        Packet packet = getCorrectPacketType(byteBuf);
+        return packet != null;
     }
 
     public Packet decode(ByteBuf byteBuf){
@@ -25,30 +31,26 @@ public class PacketDecoder {
         PacketId packetId = getPacketId(byteBuf);
         switch (packetId) {
             case MOTION:
+            case CAR_SETUPS:
+            case LOBBY_INFO:
+            case SESSION_HISTORY:
                 return null;
             case SESSION:
-//                return new PacketSessionData();
-                return null;
+                return new PacketSessionData();
             case LAP_DATA:
                 return new PacketLapData();
             case EVENT:
-                return null;
-            case PARTICIPANTS:
-                return null;
-            case CAR_SETUPS:
-                return null;
+                return new PacketEventData();
             case CAR_TELEMETRY:
-                return null;
+                return new PacketCarTelemetryData();
             case CAR_STATUS:
-                return null;
+                return new PacketCarStatusData();
             case FINAL_CLASSIFICATION:
-                return null;
-            case LOBBY_INFO:
-                return null;
+                return new FinalClassificationData();
             case CAR_DAMAGE:
-                return null;
-            case SESSION_HISTORY:
-                return null;
+                return new PacketCarDamageData();
+            case PARTICIPANTS:
+                return new PacketParticipantsData();
             default:
                 throw new IllegalArgumentException("PacketId=" + packetId + " not supported");
 

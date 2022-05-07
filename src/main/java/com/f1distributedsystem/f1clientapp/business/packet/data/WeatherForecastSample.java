@@ -25,12 +25,6 @@ public class WeatherForecastSample {
     private short airTemperatureChange;
     private short rainPercentage;
 
-    /**
-     * Fill the current WeatherForecastSample with the raw bytes representation
-     *
-     * @param buffer buffer with the raw bytes representation
-     * @return current filled WeatherForecastSample instance
-     */
     public WeatherForecastSample fill(ByteBuf buffer) {
         this.sessionType = SessionType.valueOf(buffer.readUnsignedByte());
         this.timeOffset = buffer.readUnsignedByte();
@@ -41,24 +35,6 @@ public class WeatherForecastSample {
         this.airTemperatureChange = buffer.readByte();
         this.rainPercentage = buffer.readUnsignedByte();
         return this;
-    }
-
-    /**
-     * Fill the buffer with the raw bytes representation of the current WeatherForecastSample instance
-     *
-     * @param buffer buffer to fill
-     * @return filled buffer
-     */
-    public ByteBuf fillBuffer(ByteBuf buffer) {
-        buffer.writeByte(this.sessionType.getValue());
-        buffer.writeByte(this.timeOffset);
-        buffer.writeByte(this.weather.getValue());
-        buffer.writeByte(this.trackTemperature);
-        buffer.writeByte(this.trackTemperatureChange);
-        buffer.writeByte(this.airTemperature);
-        buffer.writeByte(this.airTemperatureChange);
-        buffer.writeByte(this.rainPercentage);
-        return buffer;
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.f1distributedsystem.f1clientapp.business.packet.enumsPacket;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ZoneFlag {
+public enum VehicleFiaFlag {
     INVALID_UNKNOWN(-1),
     NONE(0),
     GREEN(1),
@@ -11,21 +11,21 @@ public enum ZoneFlag {
     YELLOW(3),
     RED(4);
 
-    private static Map<Integer, ZoneFlag> map = new HashMap<>();
+    private static Map<Integer, VehicleFiaFlag> map = new HashMap<>();
 
     static {
-        for (ZoneFlag zoneFlag : ZoneFlag.values()) {
-            map.put(zoneFlag.value, zoneFlag);
+        for (VehicleFiaFlag vehicleFiaFlag : VehicleFiaFlag.values()) {
+            map.put(vehicleFiaFlag.value, vehicleFiaFlag);
         }
     }
 
     private int value;
-    
-    ZoneFlag(int value) {
+
+    VehicleFiaFlag(int value) {
         this.value = value;
     }
 
-    public static ZoneFlag valueOf(int value) {
+    public static VehicleFiaFlag valueOf(int value) {
         return map.get(value);
     }
 

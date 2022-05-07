@@ -1,8 +1,7 @@
 package com.f1distributedsystem.f1clientapp.business.packet.impl;
 
 import com.f1distributedsystem.f1clientapp.business.packet.Packet;
-import com.f1distributedsystem.f1clientapp.business.packet.PacketHeader;
-import com.f1distributedsystem.f1clientapp.business.packet.data.LapData;
+import com.f1distributedsystem.f1clientapp.business.packet.data.CarStatusData;
 import com.f1distributedsystem.f1clientapp.utilities.Const;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
@@ -13,20 +12,16 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PacketLapData extends Packet {
-
-    public static final int SIZE = PacketHeader.SIZE +
-            LapData.SIZE * Const.CARS;
-
-    private List<LapData> lapData = new ArrayList<>(Const.CARS);
+public class PacketCarStatusData extends Packet {
+    private List<CarStatusData> carStatusData = new ArrayList<>(Const.CARS);
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("LapData[");
+        StringBuilder sb = new StringBuilder("CarStatus[");
         sb.append(super.toString());
-        sb.append(",lapData=");
-        for (LapData l : lapData) {
-            sb.append(l.toString() + ",");
+        sb.append(",carStatusData=");
+        for (CarStatusData c : carStatusData) {
+            sb.append(c.toString() + ",");
         }
         sb.replace(sb.length() - 1, sb.length() - 1, "]");
         return sb.toString();
@@ -36,10 +31,9 @@ public class PacketLapData extends Packet {
     public Packet fill(ByteBuf buffer) {
         super.fill(buffer);
         for (int i = 0; i < Const.CARS; i++) {
-            LapData ld = new LapData();
-            this.lapData.add(ld.fill(buffer));
+            CarStatusData csd = new CarStatusData();
+            this.carStatusData.add(csd.fill(buffer));
         }
         return this;
     }
-
 }

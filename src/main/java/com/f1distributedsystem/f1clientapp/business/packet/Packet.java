@@ -25,16 +25,6 @@ public abstract class Packet {
         return this;
     }
 
-    /**
-     * Fill the provided buffer with the raw bytes representation of the current Packet instance
-     *
-     * @param buffer buffer to fill with the packet raw bytes
-     * @return filled buffer
-     */
-    public ByteBuf fillBuffer(ByteBuf buffer) {
-        this.header.fillBuffer(buffer);
-        return buffer;
-    }
 
     @Override
     public String toString() {

@@ -11,9 +11,6 @@ public class MarshalZone {
 
     public static final int SIZE = 5;
 
-    /**
-     * Fraction (0..1) of way through the lap the marshal zone starts
-     */
     private float zoneStart;
     public ZoneFlag zoneFlag;
 

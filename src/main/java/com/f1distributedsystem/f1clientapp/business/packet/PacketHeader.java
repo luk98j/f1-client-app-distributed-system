@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 
 /**
  * struct PacketHeader
@@ -30,7 +31,7 @@ public class PacketHeader {
     public static final int SIZE = 24;
     // offset in the raw bytes where the packetId is
     public static final int PACKET_ID_OFFSET = 5;
-
+    private ByteBuffer byteBuffer;
     private int packetFormat;
     private short gameMajorVersion;
     private short gameMinorVersion;
@@ -56,19 +57,19 @@ public class PacketHeader {
         return this;
     }
 
-    public ByteBuf fillBuffer(ByteBuf buffer) {
-        buffer.writeShortLE(this.packetFormat);
-        buffer.writeByte(this.gameMajorVersion);
-        buffer.writeByte(this.gameMinorVersion);
-        buffer.writeByte(this.packetVersion);
-        buffer.writeByte(this.packetId.getValue());
-        buffer.writeLongLE(this.sessionUid.longValue());
-        buffer.writeFloatLE(this.sessionTime);
-        buffer.writeIntLE((int)this.frameIdentifier);
-        buffer.writeByte(this.playerCarIndex);
-        buffer.writeByte(this.secondaryPlayerCarIndex);
-        return buffer;
-    }
+//    public ByteBuf fillBuffer(ByteBuf buffer) {
+//        buffer.writeShortLE(this.packetFormat);
+//        buffer.writeByte(this.gameMajorVersion);
+//        buffer.writeByte(this.gameMinorVersion);
+//        buffer.writeByte(this.packetVersion);
+//        buffer.writeByte(this.packetId.getValue());
+//        buffer.writeLongLE(this.sessionUid.longValue());
+//        buffer.writeFloatLE(this.sessionTime);
+//        buffer.writeIntLE((int)this.frameIdentifier);
+//        buffer.writeByte(this.playerCarIndex);
+//        buffer.writeByte(this.secondaryPlayerCarIndex);
+//        return buffer;
+//    }
 
     @Override
     public String toString() {

@@ -19,12 +19,12 @@ public class PostSender {
             .version(HttpClient.Version.HTTP_2)
             .build();
 
-
-    public void sendPost(String additionalUrl, MainDto dto){
+    public void sendPost(String additionalUrl, MainDto dto, String uniqueId){
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(makeBody(dto)))
                 .uri(URI.create(URL+additionalUrl))
                 .header("Content-Type", "application/json")
+                .header("Unique-Key", uniqueId)
                 .build();
 
 

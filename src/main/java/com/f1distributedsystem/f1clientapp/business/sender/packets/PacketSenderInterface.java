@@ -5,5 +5,5 @@ import com.f1distributedsystem.f1clientapp.business.packet.Packet;
 import java.io.IOException;
 
 public interface PacketSenderInterface {
-    void sendPacket(Packet packet) throws IOException, InterruptedException;
+    void sendPacket(Packet packet, String uniqueId) throws IOException, InterruptedException;
 }

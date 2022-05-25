@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.List;
 
-@AllArgsConstructor
 @Getter
 @Setter
-public class DrsDto extends MainDto {
+@AllArgsConstructor
+public class CarStatusList extends MainDto {
     private final BigInteger sessionUid;
-    private final boolean enable;
+    private final List<CarStatusDto> carStatusDtoList;
 }

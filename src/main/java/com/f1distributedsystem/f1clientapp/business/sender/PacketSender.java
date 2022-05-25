@@ -23,32 +23,32 @@ public class PacketSender {
         packetEventSender = new PacketEventSender();
     }
 
-    public void splitPackages(Packet packet) throws IOException, InterruptedException {
+    public void splitPackages(Packet packet, String uniqueId) throws IOException, InterruptedException {
         PacketId packetId = packet.getHeader().getPacketId();
         switch (packetId){
             case SESSION:
-                packetSessionSender.sendPacket(packet);
+                packetSessionSender.sendPacket(packet,uniqueId);
                 break;
             case LAP_DATA:
-                packetLapDataSender.sendPacket(packet);
+                packetLapDataSender.sendPacket(packet,uniqueId);
                 break;
             case EVENT:
-                packetEventSender.sendPacket(packet);
+                packetEventSender.sendPacket(packet,uniqueId);
                 break;
             case CAR_TELEMETRY:
-                packetCarTelemetrySender.sendPacket(packet);
+                packetCarTelemetrySender.sendPacket(packet, uniqueId);
                 break;
             case CAR_STATUS:
-                packetCarStatusSender.sendPacket(packet);
+                packetCarStatusSender.sendPacket(packet, uniqueId);
                 break;
             case FINAL_CLASSIFICATION:
-                packetFinalClassificationSender.sendPacket(packet);
+                packetFinalClassificationSender.sendPacket(packet, uniqueId);
                 break;
             case CAR_DAMAGE:
-                packetCarDamageSender.sendPacket(packet);
+                packetCarDamageSender.sendPacket(packet, uniqueId);
                 break;
             case PARTICIPANTS:
-                packetParticipantSender.sendPacket(packet);
+                packetParticipantSender.sendPacket(packet, uniqueId);
                 break;
         }
     }

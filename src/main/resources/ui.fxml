@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.AnchorPane?>
 
 <?import javafx.scene.control.Button?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.f1distributedsystem.f1clientapp.controller.Controller">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="276.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.f1distributedsystem.f1clientapp.controller.Controller">
     <children>
-        <Button id="startButton" fx:id="startButton" layoutX="39.0" layoutY="113.0" mnemonicParsing="false"
-                onAction="#startUdpServer" text="Start server" />
+        <Button id="startButton" fx:id="startButton" layoutX="72.0" layoutY="97.0" mnemonicParsing="false" onAction="#startUdpServer" prefHeight="26.0" prefWidth="283.0" text="Start client" />
+          <TextField id="portText" fx:id="portText" alignment="CENTER" layoutX="76.0" layoutY="59.0" prefHeight="25.0" prefWidth="275.0" text="20779">
+             <font>
+                <Font name="System Bold" size="12.0" />
+             </font>
+          </TextField>
+          <Label layoutX="175.0" layoutY="35.0" prefHeight="17.0" prefWidth="78.0" text="Port number" />
+          <TextField id="userKey" fx:id="userKey" alignment="CENTER" editable="false" layoutX="72.0" layoutY="168.0" prefHeight="25.0" prefWidth="283.0" />
+          <Label layoutX="185.0" layoutY="151.0" prefHeight="17.0" prefWidth="57.0" text="Your key" />
+          <Label id="errorField" fx:id="errorField" layoutX="62.0" layoutY="217.0" prefHeight="44.0" prefWidth="305.0" />
     </children>
 </AnchorPane>

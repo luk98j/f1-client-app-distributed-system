@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @AllArgsConstructor
-@Getter
 @Setter
-public class DrsDto extends MainDto {
+@Getter
+public class ParticipantListDto extends MainDto {
     private final BigInteger sessionUid;
-    private final boolean enable;
+    private final List<ParticipantDto> participantDtoList;
 }

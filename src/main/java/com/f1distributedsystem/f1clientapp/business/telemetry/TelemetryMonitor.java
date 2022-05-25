@@ -16,19 +16,19 @@ import java.net.DatagramSocket;
 import java.net.Socket;
 
 @Slf4j
-@Service
 public class TelemetryMonitor extends Thread{
-    private int port = 20779;
     private PacketDecoder controller;
     private static int MAX_BUFFER = 2048;
     private boolean is_running;
-    int counter = 01;
     private PacketSender packetSender;
+    private String uniqueId;
+    private int port;
 
-    @Autowired
-    public TelemetryMonitor(PacketDecoder controller, PacketSender packetSender) {
+    public TelemetryMonitor(PacketDecoder controller, PacketSender packetSender, String uniqueId, int port) {
         this.controller = controller;
         this.packetSender = packetSender;
+        this.uniqueId = uniqueId;
+        this.port = port;
         this.is_running = true;
     }
 
@@ -43,7 +43,11 @@ public class TelemetryMonitor extends Thread{
                 ByteBuf byteBuf = Unpooled.wrappedBuffer(buffer);
                 if (controller.checkPacket(byteBuf)) {
                     Packet packet1 = controller.decode(byteBuf);
-                    packetSender.splitPackages(packet1);
+                    try {
+                        packetSender.splitPackages(packet1, uniqueId);
+                    }catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     //System.out.println(packet1.toString());
                 }
                 socket.close();
@@ -55,6 +59,9 @@ public class TelemetryMonitor extends Thread{
             log.error(ex.getMessage());
             System.out.println("Check port: '" + port + "' or packet.");
         }
+    }
 
+    public void stopServer(){
+        is_running = false;
     }
 }

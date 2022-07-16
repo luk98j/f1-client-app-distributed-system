@@ -7,11 +7,13 @@ import com.f1distributedsystem.f1clientapp.dto.impl.CarDamageList;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarStatusDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarStatusList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PacketCarStatusSender implements PacketSenderInterface{
     private PostSender postSender = new PostSender();
     private final static String URL = "car-status";
@@ -22,13 +24,16 @@ public class PacketCarStatusSender implements PacketSenderInterface{
         BigInteger sessionid = packetCarStatusData.getHeader().getSessionUid();
         List<CarStatusData> carStatusDataList = packetCarStatusData.getCarStatusData();
         List<CarStatusDto> carStatusDtoList = new ArrayList<>();
+        int i = 0;
         for(CarStatusData carStatusData: carStatusDataList){
             CarStatusDto carStatusDto = new CarStatusDto(
+                    i,
                     carStatusData.getActualTyreCompound(),
                     carStatusData.getTyresAgeLaps(),
                     carStatusData.getErsStoreEnergy()
             );
             carStatusDtoList.add(carStatusDto);
+            i=+1;
         }
         postSender.sendPost(URL+"/post-status", new CarStatusList(sessionid, carStatusDtoList), uniqueId);
     }

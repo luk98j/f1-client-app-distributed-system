@@ -6,20 +6,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class ApplicationUi extends Application {
 
     private ConfigurableApplicationContext applicationContext;
+    private Parent root;
     @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("/ui.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
+    public void start(Stage stage) {
         Scene scene = new Scene(root);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -27,11 +26,15 @@ public class ApplicationUi extends Application {
     }
 
     @Override
-    public void init() {
+    public void init() throws IOException {
         String[] args = getParameters().getRaw().toArray(new String[0]);
-        this.applicationContext = new SpringApplicationBuilder()
+        applicationContext = new SpringApplicationBuilder()
                 .sources(F1ClientAppApplication.class)
                 .run(args);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui.fxml"));
+        loader.setControllerFactory(applicationContext::getBean);
+        root = loader.load();
+
     }
 
     @Override

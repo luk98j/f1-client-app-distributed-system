@@ -7,12 +7,14 @@ import com.f1distributedsystem.f1clientapp.dto.impl.CarFinalClasificationDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarTelemetryList;
 import com.f1distributedsystem.f1clientapp.dto.impl.FinalClasificationList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PacketFinalClassificationSender implements PacketSenderInterface{
     private PostSender postSender = new PostSender();
     private final static String URL = "final-clasification";
@@ -22,8 +24,10 @@ public class PacketFinalClassificationSender implements PacketSenderInterface{
         BigInteger sessionid = packetFinalClassificationSender.getHeader().getSessionUid();
         List<CarFinalClasificationDto> carFinalClasificationDtoList =  new ArrayList<>();
         List<FinalClassificationData> classificationData = packetFinalClassificationSender.getFinalClassificationData();
+        int i = 0;
         for(FinalClassificationData f: classificationData){
             CarFinalClasificationDto dto = new CarFinalClasificationDto(
+                    i,
                     f.getPosition(),
                     f.getNumLaps(),
                     f.getGridPosition(),
@@ -37,6 +41,7 @@ public class PacketFinalClassificationSender implements PacketSenderInterface{
                     f.getNumTyreStints()
                     );
             carFinalClasificationDtoList.add(dto);
+            i=+1;
         }
         postSender.sendPost(URL+"/post-clasification", new FinalClasificationList(sessionid, carFinalClasificationDtoList), uniqueId);
 

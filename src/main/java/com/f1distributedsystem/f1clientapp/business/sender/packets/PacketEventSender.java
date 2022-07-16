@@ -6,10 +6,11 @@ import com.f1distributedsystem.f1clientapp.business.packet.impl.PacketEventData;
 import com.f1distributedsystem.f1clientapp.dto.impl.*;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 
-@Controller
+@Service
 public class PacketEventSender implements PacketSenderInterface {
     private PostSender postSender = new PostSender();
     private final static String URL = "event";

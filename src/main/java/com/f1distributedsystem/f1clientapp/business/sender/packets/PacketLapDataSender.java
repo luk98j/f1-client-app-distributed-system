@@ -7,12 +7,14 @@ import com.f1distributedsystem.f1clientapp.dto.impl.FinalClasificationList;
 import com.f1distributedsystem.f1clientapp.dto.impl.LapDataDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.LapDataList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PacketLapDataSender implements PacketSenderInterface{
     private PostSender postSender = new PostSender();
     private final static String URL = "lap-data";
@@ -22,8 +24,13 @@ public class PacketLapDataSender implements PacketSenderInterface{
         BigInteger sessionid = packetLapData.getHeader().getSessionUid();
         List<LapDataDto> lapDataDtoList = new ArrayList<>();
         List<LapData> lapDataList = packetLapData.getLapData();
+        for (LapData lapData: packetLapData.getLapData()){
+            System.out.println(lapData);
+        }
+        int i = 0;
         for(LapData lapData: lapDataList){
             LapDataDto lapDataDto = new LapDataDto(
+                    i,
                     lapData.getLastLapTime(),
                     lapData.getCurrentLapTime(),
                     lapData.getSector1TimeInMS(),
@@ -45,7 +52,10 @@ public class PacketLapDataSender implements PacketSenderInterface{
                     lapData.getPitStopShouldServePen()
             );
             lapDataDtoList.add(lapDataDto);
+            i=+1;
         }
+
+
         postSender.sendPost(URL+"/post-lap", new LapDataList(sessionid, lapDataDtoList), uniqueId);
     }
 }

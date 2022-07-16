@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class CarTelemetryDto {
+    private int carIndex;
     private short drs;
     private int brakesTemperature[];
     private short tyresSurfaceTemperature[];

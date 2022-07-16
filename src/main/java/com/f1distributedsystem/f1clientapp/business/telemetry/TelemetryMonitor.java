@@ -5,9 +5,11 @@ import com.f1distributedsystem.f1clientapp.business.packet.PacketDecoder;
 import com.f1distributedsystem.f1clientapp.business.sender.PacketSender;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,7 +18,10 @@ import java.net.DatagramSocket;
 import java.net.Socket;
 
 @Slf4j
+@Service
+@Setter
 public class TelemetryMonitor extends Thread{
+
     private PacketDecoder controller;
     private static int MAX_BUFFER = 2048;
     private boolean is_running;
@@ -24,13 +29,14 @@ public class TelemetryMonitor extends Thread{
     private String uniqueId;
     private int port;
 
-    public TelemetryMonitor(PacketDecoder controller, PacketSender packetSender, String uniqueId, int port) {
+    @Autowired
+    public TelemetryMonitor(PacketDecoder controller, PacketSender packetSender) {
         this.controller = controller;
         this.packetSender = packetSender;
-        this.uniqueId = uniqueId;
-        this.port = port;
         this.is_running = true;
     }
+
+
 
     public void run() {
         System.out.println("SERVER RUNNING");

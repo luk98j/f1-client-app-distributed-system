@@ -9,11 +9,13 @@ import com.f1distributedsystem.f1clientapp.dto.impl.CarStatusList;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarTelemetryDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarTelemetryList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PacketCarTelemetrySender implements PacketSenderInterface{
     private PostSender postSender = new PostSender();
     private final static String URL = "car-telemetry";
@@ -24,13 +26,16 @@ public class PacketCarTelemetrySender implements PacketSenderInterface{
         BigInteger sessionid = carTelemetryData.getHeader().getSessionUid();
         List<CarTelemetryData> carStatusDataList = carTelemetryData.getCarTelemetryData();
         List<CarTelemetryDto> carStatusDtoList = new ArrayList<>();
+        int i = 0;
         for(CarTelemetryData carTelemetryData1: carStatusDataList){
             CarTelemetryDto carStatusDto = new CarTelemetryDto(
+                    i,
                     carTelemetryData1.getDrs(),
                     carTelemetryData1.getBrakesTemperature(),
                     carTelemetryData1.getTyresSurfaceTemperature()
             );
             carStatusDtoList.add(carStatusDto);
+            i=+1;
         }
         postSender.sendPost(URL+"/post-telemetry", new CarTelemetryList(sessionid, carStatusDtoList), uniqueId);
     }

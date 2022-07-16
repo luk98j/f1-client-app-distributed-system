@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class PostSender {
 
-    private final String URL = "localhost:8080/";
+    private final String URL = "http://localhost:8081/f1-api-distributed-system/";
     private final HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
@@ -38,9 +38,9 @@ public class PostSender {
         }
 
         // print status code
-        System.out.println(response.statusCode());
-        // print response body
-        System.out.println(response.body());
+//        System.out.println(response.statusCode());
+//
+//        System.out.println(response.body());
     }
 
     private String makeBody(MainDto dto){

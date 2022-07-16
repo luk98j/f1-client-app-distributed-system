@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PacketDecoder {
 
-    public PacketDecoder() {
-    }
-
     public boolean checkPacket(ByteBuf byteBuf){
         Packet packet = getCorrectPacketType(byteBuf);
         return packet != null;

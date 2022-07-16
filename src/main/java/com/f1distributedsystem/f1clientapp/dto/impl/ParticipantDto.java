@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ParticipantDto {
+    private int carIndex;
     private Driver driverId;
     private short networkId;
     private String name;

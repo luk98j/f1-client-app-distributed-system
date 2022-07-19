@@ -10,8 +10,8 @@ import lombok.Setter;
 public class LapData {
     public static final int SIZE = 49;
 
-    private float lastLapTime;
-    private float currentLapTime;
+    private long lastLapTime;
+    private long currentLapTime;
     private int sector1TimeInMS;
     private int sector2TimeInMS;
     private float lapDistance;
@@ -20,6 +20,7 @@ public class LapData {
     private short carPosition;
     private short currentLapNum;
     private PitStatus pitStatus;
+    private short numPitStops;
     private Sector sector;
     private short currentLapInvalid;
     private short penalties;
@@ -30,13 +31,13 @@ public class LapData {
     private DriverStatus driverStatus;
     private ResultStatus resultStatus;
     private PitLaneTimerActive pitLaneTimerActive;
-    private float pitLaneTimeInLaneInMS;
-    private float pitStopTimerInMS;
-    private float pitStopShouldServePen;
+    private int pitLaneTimeInLaneInMS;
+    private int pitStopTimerInMS;
+    private short pitStopShouldServePen;
 
     public LapData fill(ByteBuf buffer) {
-        this.lastLapTime = buffer.readFloatLE();
-        this.currentLapTime = buffer.readFloatLE();
+        this.lastLapTime = buffer.readUnsignedIntLE();
+        this.currentLapTime = buffer.readUnsignedIntLE();
         this.sector1TimeInMS = buffer.readUnsignedShortLE();
         this.sector2TimeInMS = buffer.readUnsignedShortLE();
         this.lapDistance = buffer.readFloatLE();
@@ -45,47 +46,22 @@ public class LapData {
         this.carPosition = buffer.readUnsignedByte();
         this.currentLapNum = buffer.readUnsignedByte();
         this.pitStatus = PitStatus.valueOf(buffer.readUnsignedByte());
+        this.numPitStops = buffer.readUnsignedByte();
         this.sector = Sector.valueOf(buffer.readUnsignedByte());
         this.currentLapInvalid = buffer.readUnsignedByte();
         this.penalties = buffer.readUnsignedByte();
         this.warnings = buffer.readUnsignedByte();
+        this.numUnservedDriveThroughPens = buffer.readUnsignedByte();
+        this.numUnservedStopGoPens = buffer.readUnsignedByte();
         this.gridPosition = buffer.readUnsignedByte();
         this.driverStatus = DriverStatus.valueOf(buffer.readUnsignedByte());
         this.resultStatus = ResultStatus.valueOf(buffer.readUnsignedByte());
         this.pitLaneTimerActive = PitLaneTimerActive.valueOf(buffer.readUnsignedByte());
-        this.pitLaneTimeInLaneInMS = buffer.readFloatLE();
-        this.pitStopTimerInMS = buffer.readFloatLE();
-        this.pitStopShouldServePen = buffer.readFloatLE();
+        this.pitLaneTimeInLaneInMS = buffer.readUnsignedShortLE();
+        this.pitStopTimerInMS = buffer.readUnsignedShortLE();
+        this.pitStopShouldServePen = buffer.readUnsignedByte();
         return this;
     }
-
-    public ByteBuf fillBuffer(ByteBuf buffer) {
-        buffer.writeFloatLE(this.lastLapTime);
-        buffer.writeFloatLE(this.currentLapTime);
-        buffer.writeShortLE(this.sector1TimeInMS);
-        buffer.writeShortLE(this.sector2TimeInMS);
-        buffer.writeFloatLE(this.lapDistance);
-        buffer.writeFloatLE(this.totalDistance);
-        buffer.writeFloatLE(this.safetyCarDelta);
-        buffer.writeByte(this.carPosition);
-        buffer.writeByte(this.currentLapNum);
-        buffer.writeByte(this.pitStatus.getValue());
-        buffer.writeByte(this.sector.getValue());
-        buffer.writeByte(this.currentLapInvalid);
-        buffer.writeByte(this.penalties);
-        buffer.writeByte(this.warnings);
-        buffer.writeByte(this.numUnservedDriveThroughPens);
-        buffer.writeByte(this.numUnservedStopGoPens);
-        buffer.writeByte(this.gridPosition);
-        buffer.writeByte(this.driverStatus.getValue());
-        buffer.writeByte(this.resultStatus.getValue());
-        buffer.writeByte(this.pitLaneTimerActive.getValue());
-        buffer.writeFloatLE(this.pitLaneTimeInLaneInMS);
-        buffer.writeFloatLE(this.pitStopTimerInMS);
-        buffer.writeFloatLE(this.pitStopShouldServePen);
-        return buffer;
-    }
-
 
     @Override
     public String toString() {

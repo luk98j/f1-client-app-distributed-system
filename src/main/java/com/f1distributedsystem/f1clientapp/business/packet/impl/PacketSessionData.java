@@ -16,11 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 public class PacketSessionData extends Packet {
-    public static final int SIZE = PacketHeader.SIZE +
-            19 // numbers of fields
-            + MarshalZone.SIZE * Const.MARSHAL_ZONES +
-            3 + WeatherForecastSample.SIZE * Const.WEATHER_FORECAST_SAMPLES
-            +26 ;
 
     private Weather weather;
     private short trackTemperature;
@@ -45,9 +40,9 @@ public class PacketSessionData extends Packet {
     private List<WeatherForecastSample> weatherForecastSamples = new ArrayList<>(Const.WEATHER_FORECAST_SAMPLES);
     private short forecastAccuracy;
     private short aiDifficulty;
-    private float seasonLinkIdentifier;
-    private float weekendLinkIdentifier;
-    private float sessionLinkIdentifier;
+    private long seasonLinkIdentifier;
+    private long weekendLinkIdentifier;
+    private long sessionLinkIdentifier;
     private short pitStopWindowIdealLap;
     private short pitStopWindowLatestLap;
     private short pitStopRejoinPosition;
@@ -145,9 +140,9 @@ public class PacketSessionData extends Packet {
         }
         this.forecastAccuracy = buffer.readUnsignedByte();
         this.aiDifficulty = buffer.readUnsignedByte();
-        this.seasonLinkIdentifier = buffer.readFloatLE();
-        this.weekendLinkIdentifier = buffer.readFloatLE();
-        this.sessionLinkIdentifier = buffer.readFloatLE();
+        this.seasonLinkIdentifier = buffer.readUnsignedIntLE();
+        this.weekendLinkIdentifier = buffer.readUnsignedIntLE();
+        this.sessionLinkIdentifier = buffer.readUnsignedIntLE();
         this.pitStopWindowIdealLap = buffer.readUnsignedByte();
         this.pitStopWindowLatestLap = buffer.readUnsignedByte();
         this.pitStopRejoinPosition = buffer.readUnsignedByte();

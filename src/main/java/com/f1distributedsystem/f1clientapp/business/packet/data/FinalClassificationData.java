@@ -20,7 +20,7 @@ public class FinalClassificationData extends Packet {
     private short points;
     private short numPitStops;
     private ResultStatus resultStatus;
-    private float bestLapTime;
+    private long bestLapTime;
     private double totalRaceTime;
     private short penaltiesTime;
     private short numPenalties;
@@ -36,7 +36,7 @@ public class FinalClassificationData extends Packet {
         this.points = buffer.readUnsignedByte();
         this.numPitStops = buffer.readUnsignedByte();
         this.resultStatus = ResultStatus.valueOf(buffer.readUnsignedByte());
-        this.bestLapTime = buffer.readFloatLE();
+        this.bestLapTime = buffer.readUnsignedIntLE();
         this.totalRaceTime = buffer.readDoubleLE();
         this.penaltiesTime = buffer.readUnsignedByte();
         this.numPenalties = buffer.readUnsignedByte();

@@ -1,0 +1,5 @@
+uint 16 - int - readUnsgnedShortLE()
+uint 8 - short - readUnsgnedByte
+float - float readFloatLe()
+uint 32 - long - readUnsgnedIntLe()
+uint 64 - BigInteger - readLongeLe

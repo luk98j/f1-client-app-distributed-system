@@ -10,6 +10,7 @@ import com.f1distributedsystem.f1clientapp.service.PostSender;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,18 @@ public class PacketLapDataSender implements PacketSenderInterface{
         BigInteger sessionid = packetLapData.getHeader().getSessionUid();
         List<LapDataDto> lapDataDtoList = new ArrayList<>();
         List<LapData> lapDataList = packetLapData.getLapData();
+        int j = 0;
         for (LapData lapData: packetLapData.getLapData()){
+            System.out.println("index: "+j);
             System.out.println(lapData);
+
+
+
+            j++;
         }
         int i = 0;
         for(LapData lapData: lapDataList){
+
             LapDataDto lapDataDto = new LapDataDto(
                     i,
                     lapData.getLastLapTime(),
@@ -38,6 +46,7 @@ public class PacketLapDataSender implements PacketSenderInterface{
                     lapData.getCarPosition(),
                     lapData.getCurrentLapNum(),
                     lapData.getPitStatus(),
+                    lapData.getNumPitStops(),
                     lapData.getSector(),
                     lapData.getCurrentLapInvalid(),
                     lapData.getPenalties(),

@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Flashback {
-    private float flashbackFrameIdentifier;
+    private long flashbackFrameIdentifier;
     private float flashbackSessionTime;
 
     public Flashback fill(ByteBuf buffer) {
-        this.flashbackFrameIdentifier = buffer.readFloatLE();
+        this.flashbackFrameIdentifier = buffer.readUnsignedIntLE();
         this.flashbackSessionTime = buffer.readFloatLE();
         return this;
     }

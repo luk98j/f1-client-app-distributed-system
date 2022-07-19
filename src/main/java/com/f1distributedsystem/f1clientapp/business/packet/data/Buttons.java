@@ -7,10 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Buttons {
-    private float buttonStatus;
+    private long buttonStatus;
 
     public Buttons fill(ByteBuf buffer) {
-        this.buttonStatus = buffer.readFloatLE();
+        this.buttonStatus = buffer.readUnsignedIntLE();
         return this;
     }
 

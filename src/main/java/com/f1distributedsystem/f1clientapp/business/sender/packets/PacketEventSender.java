@@ -5,6 +5,7 @@ import com.f1distributedsystem.f1clientapp.business.packet.enumsPacket.PenaltyTy
 import com.f1distributedsystem.f1clientapp.business.packet.impl.PacketEventData;
 import com.f1distributedsystem.f1clientapp.dto.impl.*;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,8 @@ import java.math.BigInteger;
 
 @Service
 public class PacketEventSender implements PacketSenderInterface {
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
     private final static String URL = "event";
     @Override
     public void sendPacket(Packet packet, String uniqueId){

@@ -5,6 +5,7 @@ import com.f1distributedsystem.f1clientapp.business.packet.impl.PacketSessionDat
 import com.f1distributedsystem.f1clientapp.dto.impl.PacketSessionDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.ParticipantListDto;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -12,7 +13,8 @@ import java.math.BigInteger;
 @Service
 public class PacketSessionSender implements PacketSenderInterface{
 
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
     private final static String URL = "session-data";
 
     @Override

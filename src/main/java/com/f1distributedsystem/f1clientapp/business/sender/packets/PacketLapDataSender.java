@@ -7,6 +7,7 @@ import com.f1distributedsystem.f1clientapp.dto.impl.FinalClasificationList;
 import com.f1distributedsystem.f1clientapp.dto.impl.LapDataDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.LapDataList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 public class PacketLapDataSender implements PacketSenderInterface{
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
     private final static String URL = "lap-data";
     @Override
     public void sendPacket(Packet packet, String uniqueId) throws IOException, InterruptedException {
@@ -29,14 +31,10 @@ public class PacketLapDataSender implements PacketSenderInterface{
         for (LapData lapData: packetLapData.getLapData()){
             System.out.println("index: "+j);
             System.out.println(lapData);
-
-
-
             j++;
         }
         int i = 0;
         for(LapData lapData: lapDataList){
-
             LapDataDto lapDataDto = new LapDataDto(
                     i,
                     lapData.getLastLapTime(),
@@ -61,7 +59,7 @@ public class PacketLapDataSender implements PacketSenderInterface{
                     lapData.getPitStopShouldServePen()
             );
             lapDataDtoList.add(lapDataDto);
-            i=+1;
+            i++;
         }
 
 

@@ -7,6 +7,7 @@ import com.f1distributedsystem.f1clientapp.dto.impl.CarFinalClasificationDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarTelemetryList;
 import com.f1distributedsystem.f1clientapp.dto.impl.FinalClasificationList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @Service
 public class PacketFinalClassificationSender implements PacketSenderInterface{
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
     private final static String URL = "final-clasification";
     @Override
     public void sendPacket(Packet packet, String uniqueId) throws IOException, InterruptedException {
@@ -41,7 +43,7 @@ public class PacketFinalClassificationSender implements PacketSenderInterface{
                     f.getNumTyreStints()
                     );
             carFinalClasificationDtoList.add(dto);
-            i=+1;
+            i++;
         }
         postSender.sendPost(URL+"/post-clasification", new FinalClasificationList(sessionid, carFinalClasificationDtoList), uniqueId);
 

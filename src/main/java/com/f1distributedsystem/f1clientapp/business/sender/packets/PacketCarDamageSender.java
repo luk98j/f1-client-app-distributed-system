@@ -7,6 +7,7 @@ import com.f1distributedsystem.f1clientapp.business.packet.impl.PacketEventData;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarDamageDataDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarDamageList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ import java.util.List;
 @Service
 public class PacketCarDamageSender implements PacketSenderInterface {
     private final static String URL = "damage";
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
 
     @Override
     public void sendPacket(Packet packet, String uniqueId) {

@@ -9,6 +9,7 @@ import com.f1distributedsystem.f1clientapp.dto.impl.CarStatusList;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarTelemetryDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.CarTelemetryList;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 public class PacketCarTelemetrySender implements PacketSenderInterface{
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
     private final static String URL = "car-telemetry";
 
     @Override

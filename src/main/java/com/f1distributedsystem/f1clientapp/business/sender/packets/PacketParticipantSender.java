@@ -7,6 +7,7 @@ import com.f1distributedsystem.f1clientapp.dto.impl.LapDataList;
 import com.f1distributedsystem.f1clientapp.dto.impl.ParticipantDto;
 import com.f1distributedsystem.f1clientapp.dto.impl.ParticipantListDto;
 import com.f1distributedsystem.f1clientapp.service.PostSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,7 +18,8 @@ import java.util.List;
 @Service
 public class PacketParticipantSender implements PacketSenderInterface{
 
-    private PostSender postSender = new PostSender();
+    @Autowired
+    private PostSender postSender;
     private final static String URL = "participant-data";
 
     @Override

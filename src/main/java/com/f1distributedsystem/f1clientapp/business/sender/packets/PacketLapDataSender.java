@@ -59,7 +59,7 @@ public class PacketLapDataSender implements PacketSenderInterface{
                     lapData.getPitStopShouldServePen()
             );
             lapDataDtoList.add(lapDataDto);
-            i++;
+            i+=1;
         }
 
 

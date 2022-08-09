@@ -38,7 +38,7 @@ public class PacketParticipantSender implements PacketSenderInterface{
                     participantData.getYourTelemetry()
             );
             participantDtoList.add(participantDto);
-            i=+1;
+            i+=1;
         }
         postSender.sendPost(URL+"/post-participant", new ParticipantListDto(sessionid, participantDtoList), uniqueId);
     }

@@ -35,7 +35,7 @@ public class PacketCarStatusSender implements PacketSenderInterface{
                     carStatusData.getErsStoreEnergy()
             );
             carStatusDtoList.add(carStatusDto);
-            i=+1;
+            i+=1;
         }
         postSender.sendPost(URL+"/post-status", new CarStatusList(sessionid, carStatusDtoList), uniqueId);
     }

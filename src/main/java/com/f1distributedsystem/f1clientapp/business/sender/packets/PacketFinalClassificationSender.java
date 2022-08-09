@@ -43,7 +43,7 @@ public class PacketFinalClassificationSender implements PacketSenderInterface{
                     f.getNumTyreStints()
                     );
             carFinalClasificationDtoList.add(dto);
-            i++;
+            i+=1;
         }
         postSender.sendPost(URL+"/post-clasification", new FinalClasificationList(sessionid, carFinalClasificationDtoList), uniqueId);
 

@@ -37,7 +37,7 @@ public class PacketCarTelemetrySender implements PacketSenderInterface{
                     carTelemetryData1.getTyresSurfaceTemperature()
             );
             carStatusDtoList.add(carStatusDto);
-            i=+1;
+            i+=1;
         }
         postSender.sendPost(URL+"/post-telemetry", new CarTelemetryList(sessionid, carStatusDtoList), uniqueId);
     }

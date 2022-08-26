@@ -32,6 +32,7 @@ public class CarStatusData {
     private float ersHarvestedThisLapMGUK;
     private float ersHarvestedThisLapMGUH;
     private float ersDeployedThisLap;
+    private short networkPaused;
 
     public CarStatusData fill(ByteBuf buffer) {
         this.tractionControl = TractionControl.valueOf(buffer.readUnsignedByte());
@@ -56,6 +57,7 @@ public class CarStatusData {
         this.ersHarvestedThisLapMGUK = buffer.readFloatLE();
         this.ersHarvestedThisLapMGUH = buffer.readFloatLE();
         this.ersDeployedThisLap = buffer.readFloatLE();
+        this.networkPaused = buffer.readUnsignedByte();
         return this;
     }
 

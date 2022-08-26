@@ -32,7 +32,9 @@ public class PacketCarStatusSender implements PacketSenderInterface{
                     i,
                     carStatusData.getActualTyreCompound(),
                     carStatusData.getTyresAgeLaps(),
-                    carStatusData.getErsStoreEnergy()
+                    carStatusData.getErsStoreEnergy(),
+                    carStatusData.getFuelInTank(),
+                    carStatusData.getVehicleFiaFlags()
             );
             carStatusDtoList.add(carStatusDto);
             i+=1;

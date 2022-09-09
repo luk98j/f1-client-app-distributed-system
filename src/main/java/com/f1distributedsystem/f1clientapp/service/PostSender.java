@@ -30,21 +30,13 @@ public class PostSender {
                 .header("Content-Type", "application/json")
                 .header("Unique-Key", uniqueId)
                 .build();
-
-
-        HttpResponse<String> response = null;
         try {
-            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        // print status code
-//        System.out.println(response.statusCode());
-//
-//        System.out.println(response.body());
     }
 
     private String makeBody(MainDto dto){

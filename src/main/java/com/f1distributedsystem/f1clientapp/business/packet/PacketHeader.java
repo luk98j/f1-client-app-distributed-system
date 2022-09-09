@@ -57,20 +57,6 @@ public class PacketHeader {
         return this;
     }
 
-//    public ByteBuf fillBuffer(ByteBuf buffer) {
-//        buffer.writeShortLE(this.packetFormat);
-//        buffer.writeByte(this.gameMajorVersion);
-//        buffer.writeByte(this.gameMinorVersion);
-//        buffer.writeByte(this.packetVersion);
-//        buffer.writeByte(this.packetId.getValue());
-//        buffer.writeLongLE(this.sessionUid.longValue());
-//        buffer.writeFloatLE(this.sessionTime);
-//        buffer.writeIntLE((int)this.frameIdentifier);
-//        buffer.writeByte(this.playerCarIndex);
-//        buffer.writeByte(this.secondaryPlayerCarIndex);
-//        return buffer;
-//    }
-
     @Override
     public String toString() {
         return "Header[format=" + this.packetFormat +

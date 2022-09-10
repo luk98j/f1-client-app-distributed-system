@@ -54,11 +54,8 @@ public class TelemetryMonitor extends Thread{
                     }catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //System.out.println(packet1.toString());
                 }
                 socket.close();
-
-               // packet.setLength(buffer.length);
             }
 
         } catch (IOException ex) {
